@@ -31,7 +31,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar>().configureEach {
-    launchScript()
+    this.archiveFileName.set("${rootProject.name}.jar")
 }
 
 tasks.withType<Test> {
