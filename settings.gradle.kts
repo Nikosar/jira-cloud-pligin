@@ -1,1 +1,1 @@
-rootProject.name = "jira-cloud-pligin"
+rootProject.name = "jira-cloud-plugin"
