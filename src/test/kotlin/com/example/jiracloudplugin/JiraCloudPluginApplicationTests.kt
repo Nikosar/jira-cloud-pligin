@@ -1,10 +1,10 @@
-package com.example.jiracloudpligin
+package com.example.jiracloudplugin
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class JiraCloudPliginApplicationTests {
+class JiraCloudPluginApplicationTests {
 
     @Test
     fun contextLoads() {

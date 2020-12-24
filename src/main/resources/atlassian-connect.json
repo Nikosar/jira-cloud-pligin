@@ -1,0 +1,49 @@
+{
+  "name": "Hello World",
+  "description": "Atlassian Connect app",
+  "key": "com.example.myapp",
+  "baseUrl": "https://nikosar.ddns.net",
+  "vendor": {
+    "name": "Example, Inc.",
+    "url": "http://example.com"
+  },
+  "authentication": {
+    "type": "jwt"
+  },
+  "lifecycle": {
+    "installed": "/installed",
+    "uninstalled": "/uninstalled"
+  },
+  "apiVersion": 1,
+  "modules": {
+    "generalPages": [
+      {
+        "url": "/hello",
+        "key": "hello-world",
+        "location": "system.top.navigation.bar",
+        "name": {
+          "value": "Greeting"
+        }
+      }
+    ],
+    "webSections": [
+      {
+        "key": "example-menu-section",
+        "location": "admin_plugins_menu",
+        "name": {
+          "value": "Big tab"
+        }
+      }
+    ],
+    "adminPages": [
+      {
+        "url": "/hello",
+        "key": "example-section-page",
+        "location": "admin_plugins_menu/example-menu-section",
+        "name": {
+          "value": "For big guys"
+        }
+      }
+    ]
+  }
+}
