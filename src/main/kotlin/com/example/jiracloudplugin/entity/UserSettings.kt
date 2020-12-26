@@ -6,6 +6,7 @@ import com.vladmihalcea.hibernate.type.json.JsonStringType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.hibernate.annotations.TypeDefs
+import java.util.*
 import javax.persistence.*
 
 @Entity
@@ -15,7 +16,7 @@ import javax.persistence.*
 )
 class UserSettings(
         @Id
-        var id: String,
+        var id: UUID,
         @OneToOne
         var atlassianHost: AtlassianHost,
         @Type(type = "jsonb")
@@ -25,5 +26,7 @@ class UserSettings(
 
 class Settings(
         var name: String,
+        var projects: List<String>,
+        var users: List<String>,
         var flag: Boolean
 )

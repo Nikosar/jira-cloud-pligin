@@ -30,6 +30,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.2.18")
     implementation("com.vladmihalcea:hibernate-types-52:2.10.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 //    testImplementation("org.springframework.security:spring-security-test")
 }
 
