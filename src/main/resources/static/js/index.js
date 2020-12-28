@@ -1,9 +1,41 @@
+const MAX_RESULTS = 50;
+
 $(document).ready(async function () {
-    const projectSelect = AJS.$("#project-select").auiSelect2();
-    let projects = getProjects(projectSelect);
+    const projectSelect = AJS.$("#project-select").auiSelect2({
+        dataType: "json",
+        ajax: {
+            data: function (params, page) {
+                return {
+                    search: params,
+                    page: page || 1
+                }
+            },
+            transport: function (params) {
+                return getProjects(params.data.search, params.data.page, MAX_RESULTS)
+                    .then((resp) => params.success(JSON.parse(resp.body))
+                        .catch((e) => params.failure(e)));
+
+            },
+            results: function (resp) {
+                console.log(resp)
+                let mappedResult = []
+                Object.values(resp.values).forEach((project) => {
+                    mappedResult.push({id: project.id, text: project.name});
+                })
+                console.log(mappedResult)
+                return {
+                    results: mappedResult,
+                    pagination: {
+                        more: false
+                    }//(resp.startAt + resp.maxResults) <= resp.total
+                }
+            }
+        }
+    });
+    // let projects = getProjects(projectSelect);
     const userSelect = AJS.$("#user-select").auiSelect2();
-    let users = getUsers(userSelect);
-    await projects;
+    let users = getUsers(userSelect, "db");
+    // await projects;
     await users;
 
     getSettings();
@@ -19,19 +51,15 @@ $(document).ready(async function () {
 })
 
 
-async function getProjects(select2) {
+async function getProjects(search, page, maxResults) {
+    const offset = maxResults * (page - 1)
     return AP.request({
-        url: "/rest/api/3/project/search",
+        url: `/rest/api/3/project/search?query=${search}&startAt=${offset}`,
         type: "GET",
         headers: {
             'Accept': 'application/json'
         }
-    }).then(resp => {
-        let data = JSON.parse(resp.body);
-        Object.values(data.values).forEach((project) => {
-            createOptionIfNotExist(project.name, project.id, select2);
-        })
-    }).catch(e => console.log(e))
+    })
 }
 
 function createOptionIfNotExist(name, id, select2) {
@@ -42,9 +70,9 @@ function createOptionIfNotExist(name, id, select2) {
     }
 }
 
-async function getUsers(select2) {
+async function getUsers(select2, search) {
     return AP.request({
-        url: "/rest/api/3/user/picker?query=dbn",
+        url: `/rest/api/3/user/picker?query=${search}`,
         type: "GET",
         headers: {
             'Accept': 'application/json'
