@@ -14,6 +14,11 @@
     "installed": "/installed",
     "uninstalled": "/uninstalled"
   },
+  "scopes": [
+    "read",
+    "write",
+    "delete"
+  ],
   "apiVersion": 1,
   "modules": {
     "generalPages": [
@@ -31,7 +36,7 @@
         "key": "example-menu-section",
         "location": "admin_plugins_menu",
         "name": {
-          "value": "Big tab"
+          "value": "Jira cloud plugin"
         }
       }
     ],
@@ -41,7 +46,7 @@
         "key": "example-section-page",
         "location": "admin_plugins_menu/example-menu-section",
         "name": {
-          "value": "For big guys"
+          "value": "Settings"
         }
       }
     ]
