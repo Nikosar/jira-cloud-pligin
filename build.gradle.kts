@@ -24,7 +24,6 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.hsqldb:hsqldb")
     implementation("com.atlassian.connect:atlassian-connect-spring-boot-starter:$atlassianConnectVersion")
     implementation("com.atlassian.connect:atlassian-connect-spring-boot-jpa-starter:$atlassianConnectVersion")
     implementation("org.postgresql:postgresql:42.2.18")

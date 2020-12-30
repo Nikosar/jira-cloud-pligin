@@ -26,7 +26,22 @@ class UserSettings(
 
 class Settings(
         var name: String,
-        var projects: List<String>,
-        var users: List<String>,
+        var projects: List<Project>,
         var flag: Boolean
+)
+
+class Project(
+        var jiraProject: JiraProject,
+        var users: List<JiraUser>,
+)
+
+class JiraProject(
+        var name: String,
+        var id: String,
+        var key: String
+)
+
+class JiraUser(
+        var displayName: String,
+        var accountId: String
 )

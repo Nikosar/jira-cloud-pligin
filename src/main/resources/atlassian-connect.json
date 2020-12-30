@@ -42,7 +42,7 @@
     ],
     "adminPages": [
       {
-        "url": "/hello",
+        "url": "/index.html",
         "key": "example-section-page",
         "location": "admin_plugins_menu/example-menu-section",
         "name": {

@@ -1,0 +1,14 @@
+.content {
+    padding: 0 40px;
+}
+
+.row {
+    margin-top: 8px;
+}
+
+.button-block {
+    margin-top: 24px;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
