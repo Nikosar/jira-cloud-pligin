@@ -23,7 +23,7 @@
   "modules": {
     "generalPages": [
       {
-        "url": "/hello",
+        "url": "/app/hello1",
         "key": "hello-world",
         "location": "system.top.navigation.bar",
         "name": {
@@ -42,7 +42,7 @@
     ],
     "adminPages": [
       {
-        "url": "/index.html",
+        "url": "/app/settings",
         "key": "example-section-page",
         "location": "admin_plugins_menu/example-menu-section",
         "name": {

@@ -14,4 +14,9 @@ class HelloController {
     fun controllerHello(): String {
         return "helloworld"
     }
+
+    @GetMapping("/app/**")
+    fun hello1(): String {
+        return "forward:/index.html"
+    }
 }

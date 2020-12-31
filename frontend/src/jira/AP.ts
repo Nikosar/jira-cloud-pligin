@@ -1,4 +1,10 @@
-export const AP = (window as any).AP;
+export const AP = (() => {
+    if (process.env.NODE_ENV === 'production') {
+        return (window as any).AP
+    } else {
+        return require("./APMock/APMock").MockAP;
+    }
+})();
 
 export async function getToken(): Promise<string> {
     return AP.context.getToken();

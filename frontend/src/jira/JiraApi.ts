@@ -2,16 +2,27 @@ import {AP} from "./AP";
 import JiraProject from "./JiraProject";
 import JiraUser from "./JiraUser";
 
+const MAX_RESULTS = 10;
+
+type JiraResponse = {
+    body: string
+}
+type Page<T> = {
+    values: T[]
+}
+
+const body = <T>(response: JiraResponse): T => JSON.parse(response.body)
+
 export function getProjects(query: string): Promise<JiraProject[]> {
     return AP.request({
-        url: `/rest/api/3/project/search?query=${query}`,
+        url: `/rest/api/3/project/search?query=${query}&maxResults=${MAX_RESULTS}`,
         type: "GET",
         headers: {
             'Accept': 'application/json'
         }
     })
-        .then((response: any) => JSON.parse(response.body))
-        .then((body: any) => Object.values(body.values))
+        .then((response: JiraResponse) => body<Page<JiraProject>>(response))
+        .then((body: Page<JiraProject>) => body.values)
 }
 
 export function getUsersByProject(query: string, projectKey: string): Promise<JiraUser[]> {
@@ -22,6 +33,5 @@ export function getUsersByProject(query: string, projectKey: string): Promise<Ji
             'Accept': 'application/json'
         }
     })
-        .then((response: any) => JSON.parse(response.body))
-        .then((body: any) => Object.values(body))
+        .then((response: JiraResponse) => body<JiraUser[]>(response))
 }

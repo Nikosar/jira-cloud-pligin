@@ -7,7 +7,7 @@ import {Project, Settings} from "../api/Settings";
 import {getSettings, postSettings} from "../api/AppApi";
 import JiraProject from "../jira/JiraProject";
 import {ProjectsLayout} from "./ProjectsLayout";
-import './Settings.css';
+import './SettingsPage.css';
 
 const initialState = new Settings("", [new Project(new JiraProject(), [])], false)
 
@@ -17,7 +17,7 @@ export const SettingsPage = () => {
     useEffect(() => {
         getSettings().then(settings => {
             setSettings(settings)
-        })
+        }).catch((e) => setSettings(initialState))
     }, [])
 
     const setSetting = (name: string, value: any) => {
@@ -38,12 +38,12 @@ export const SettingsPage = () => {
                        label={"Name"}
                        isCompact={true}
                        value={settings.name}
-                       onChange={(e: any) => setSetting("name", e.target.value)}/>
+                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSetting("name", e.target.value)}/>
         </div>
         <div className={"row"}>
             <Checkbox name={"flag"}
                       isChecked={settings.flag}
-                      onChange={(e: any) => setSetting("flag", e.target.checked)}
+                      onChange={(e) => setSetting("flag", e.target.checked)}
                       label={"Flag"}/>
         </div>
         <ProjectsLayout projects={settings.projects}
