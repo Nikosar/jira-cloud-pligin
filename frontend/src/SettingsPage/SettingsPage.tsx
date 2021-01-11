@@ -26,6 +26,13 @@ export const SettingsPage = () => {
         }))
     }
 
+    const setProjects = (newProjects: (oldProjects: Project[]) => Project[]) => {
+        setSettings(prevState => ({
+            ...prevState,
+            projects: newProjects(prevState.projects)
+        }))
+    }
+
     const submit = () => {
         postSettings(settings).then()
     }
@@ -47,9 +54,7 @@ export const SettingsPage = () => {
                       label={"Flag"}/>
         </div>
         <ProjectsLayout projects={settings.projects}
-                        setSettings={(stateMutationFunc: (prevState: Settings) => Settings) =>
-                            setSettings(stateMutationFunc)
-                        }/>
+                        setProjects={setProjects}/>
         <div className={"button-block"}>
             <Button appearance="primary" onClick={submit}>Save</Button>
         </div>

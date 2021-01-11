@@ -5,32 +5,25 @@ import Button from "@atlaskit/button";
 
 type ProjectsLayoutType = {
     projects: Project[],
-    setSettings: (value: (prevState: Settings) => Settings) => void
+    setProjects: (value: (oldProjects: Project[]) => Project[]) => void
 }
 
-export const ProjectsLayout = ({projects, setSettings}: ProjectsLayoutType) => {
+export const ProjectsLayout = ({projects, setProjects}: ProjectsLayoutType) => {
     const appendProject = () => {
-        setSettings(prevState => {
-            return {
-                ...prevState,
-                projects: [...prevState.projects, new Project()]
-            }
-        })
+        setProjects(oldProjects => [...oldProjects, new Project()])
     }
 
     const changeProject = (project: Project, elementIndex: number) => {
-        setSettings(prevState => {
-            let newProjects = [...prevState.projects]
+        setProjects(oldProjects => {
+            let newProjects = [...oldProjects]
             newProjects[elementIndex] = project;
-            return {...prevState, projects: newProjects};
+            return newProjects;
         })
     }
 
     const removeProject = (elementIndex: number) => {
-        setSettings(prevState => {
-            let newProjects = prevState.projects.filter((value, index) => index !== elementIndex);
-            return {...prevState, projects: newProjects}
-        })
+        setProjects(oldProjects =>
+            oldProjects.filter((value, index) => index !== elementIndex))
     }
 
     const createProjects = (projects: Project[]) => {
