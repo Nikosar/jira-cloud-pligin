@@ -35,3 +35,16 @@ export function getUsersByProject(query: string, projectKey: string): Promise<Ji
     })
         .then((response: JiraResponse) => body<JiraUser[]>(response))
 }
+
+export function evaluateJiraExpression(expression: string): Promise<string> {
+    return AP.request({
+        url: `/rest/api/2/expression/eval`,
+        type: "POST",
+        contentType: 'application/json',
+        headers: {
+            'Accept': 'application/json',
+        },
+        data: JSON.stringify({"expression": expression})
+    })
+        .then((response: JiraResponse) => body<string>(response))
+}

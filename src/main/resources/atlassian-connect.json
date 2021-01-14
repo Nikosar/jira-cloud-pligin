@@ -1,8 +1,8 @@
 {
-  "name": "Hello World",
+  "name": "Hello world",
   "description": "Atlassian Connect app",
-  "key": "com.example.myapp",
-  "baseUrl": "https://nikosar.ddns.net",
+  "key": "${addon.key}",
+  "baseUrl": "${addon.base-url}",
   "vendor": {
     "name": "Example, Inc.",
     "url": "http://example.com"
@@ -21,6 +21,25 @@
   ],
   "apiVersion": 1,
   "modules": {
+    "webItems": [
+      {
+        "key": "example-tools-item",
+        "location": "operations-top-level",
+        "weight": 10,
+        "conditions": [
+          {
+            "condition": "jira_expression",
+            "params": {
+              "expression": "app.properties['settings'].projects.filter(projectSetting => projectSetting.jiraProject.id == project.id + '').flatMap(project => project.users).filter(userSetting => userSetting.accountId == user.accountId).length > 0"
+            }
+          }
+        ],
+        "name": {
+          "value": "Example app link"
+        },
+        "url": "/app/settings"
+      }
+    ],
     "generalPages": [
       {
         "url": "/app/hello1",

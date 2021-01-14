@@ -7,6 +7,7 @@ import {Option} from "../api/Option";
 import JiraUser from "../jira/JiraUser";
 import JiraProject from "../jira/JiraProject";
 import {getProjects, getUsersByProject} from "../jira/JiraApi";
+import EditorDividerIcon from '@atlaskit/icon/glyph/editor/divider';
 
 type ProjectSettingsType = {
     project: Project,
@@ -28,7 +29,13 @@ export const ProjectSettings = ({project, onChange, onRemove}: ProjectSettingsTy
     };
 
     return <div className={"row"}>
-        <label>{"Project"}</label>
+        <h3>
+            <span>
+                {"Project "}
+                <Button onClick={onRemove} spacing={"compact"} iconBefore={<EditorDividerIcon label={"minusSign"}/>}/>
+            </span>
+        </h3>
+
         <AsyncSelect name={"project"}
                      value={Option.fromProject(project.jiraProject)}
                      loadOptions={queryProjects}
@@ -42,9 +49,6 @@ export const ProjectSettings = ({project, onChange, onRemove}: ProjectSettingsTy
                      loadOptions={(query: string) => queryUsers(query, project.jiraProject.key)}
                      onChange={(e) => onChangeUsers(e as Option<JiraUser>[])}
                      isSearchable={true}/>
-        <div className="row">
-            <Button onClick={onRemove}>-</Button>
-        </div>
     </div>
 }
 
